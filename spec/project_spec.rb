@@ -2,7 +2,7 @@
 
 RSpec.describe 'RuboCop Project', type: :feature do
   let(:cop_names) do
-    RuboCop::Cop::Cop
+    RubyLint::Cop::Cop
       .registry
       .without_department(:Test)
       .without_department(:InternalAffairs)
@@ -11,7 +11,7 @@ RSpec.describe 'RuboCop Project', type: :feature do
   end
 
   describe 'default configuration file' do
-    subject(:config) { RuboCop::ConfigLoader.load_file('config/default.yml') }
+    subject(:config) { RubyLint::ConfigLoader.load_file('config/default.yml') }
 
     let(:configuration_keys) { config.keys }
 
@@ -59,7 +59,7 @@ RSpec.describe 'RuboCop Project', type: :feature do
         enforced_styles = config[name]
                           .select { |key, _| key.start_with?('Enforced') }
         enforced_styles.each do |style_name, style|
-          supported_key = RuboCop::Cop::Util.to_supported_styles(style_name)
+          supported_key = RubyLint::Cop::Util.to_supported_styles(style_name)
           valid = config[name][supported_key]
           unless valid
             errors.push("#{supported_key} is missing for #{name}")
@@ -77,7 +77,7 @@ RSpec.describe 'RuboCop Project', type: :feature do
     it 'does not have nay duplication' do
       fname = File.expand_path('../config/default.yml', __dir__)
       content = File.read(fname)
-      RuboCop::YAMLDuplicationChecker.check(content, fname) do |key1, key2|
+      RubyLint::YAMLDuplicationChecker.check(content, fname) do |key1, key2|
         raise "#{fname} has duplication of #{key1.value} " \
               "on line #{key1.start_line} and line #{key2.start_line}"
       end
@@ -85,7 +85,7 @@ RSpec.describe 'RuboCop Project', type: :feature do
   end
 
   describe 'cop message' do
-    let(:cops) { RuboCop::Cop::Cop.all }
+    let(:cops) { RubyLint::Cop::Cop.all }
 
     it 'end with a period or a question mark' do
       cops.each do |cop|

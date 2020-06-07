@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-module RuboCop
+module RubyLint
   module Cop
     module Test
       # This cop allows us to test the {AlignmentCorrector}. A node that is
       # annotated with a comment of the form `# << delta` or `# >> delta` where
       # `delta` is an integer will be shifted by `delta` columns in the
       # indicated direction.
-      class AlignmentDirective < RuboCop::Cop::Cop
+      class AlignmentDirective < RubyLint::Cop::Cop
         MSG = 'Indent this node'
 
         def investigate(processed_source)

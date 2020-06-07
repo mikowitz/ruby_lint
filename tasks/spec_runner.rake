@@ -4,7 +4,7 @@ require 'rspec/core'
 require 'test_queue'
 require 'test_queue/runner/rspec'
 
-module RuboCop
+module RubyLint
   # Helper for running specs with a temporary external encoding.
   # This is a bit risky, since strings defined before the block may have a
   # different encoding than strings defined inside the block.
@@ -110,10 +110,10 @@ end
 
 desc 'Run RSpec code examples'
 task :spec do
-  RuboCop::SpecRunner.new.run_specs
+  RubyLint::SpecRunner.new.run_specs
 end
 
 desc 'Run RSpec code examples with ASCII encoding'
 task :ascii_spec do
-  RuboCop::SpecRunner.new(external_encoding: 'ASCII').run_specs
+  RubyLint::SpecRunner.new(external_encoding: 'ASCII').run_specs
 end

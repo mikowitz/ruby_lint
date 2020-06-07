@@ -61,13 +61,13 @@ You can customize RuboCop's output format with custom formatters.
 === Creating a Custom Formatter
 
 To implement a custom formatter, you need to subclass
-`RuboCop::Formatter::BaseFormatter` and override some methods,
+`RubyLint::Formatter::BaseFormatter` and override some methods,
 or implement all formatter API methods by duck typing.
 
 Please see the documents below for more formatter API details.
 
-* https://www.rubydoc.info/gems/rubocop/RuboCop/Formatter/BaseFormatter[RuboCop::Formatter::BaseFormatter]
-* https://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Offense[RuboCop::Cop::Offense]
+* https://www.rubydoc.info/gems/rubocop/RuboCop/Formatter/BaseFormatter[RubyLint::Formatter::BaseFormatter]
+* https://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Offense[RubyLint::Cop::Offense]
 * https://www.rubydoc.info/gems/parser/Parser/Source/Range[Parser::Source::Range]
 
 === Using a Custom Formatter from the Command Line

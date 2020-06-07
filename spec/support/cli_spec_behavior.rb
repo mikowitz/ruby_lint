@@ -10,12 +10,12 @@ RSpec.shared_context 'cli spec behavior' do
   end
 
   before do
-    RuboCop::ConfigLoader.debug = false
-    RuboCop::ConfigLoader.default_configuration = nil
+    RubyLint::ConfigLoader.debug = false
+    RubyLint::ConfigLoader.default_configuration = nil
 
     # OPTIMIZE: Makes these specs faster. Work directory (the parent of
     # .rubocop_cache) is removed afterwards anyway.
-    RuboCop::ResultCache.inhibit_cleanup = true
+    RubyLint::ResultCache.inhibit_cleanup = true
   end
 
   # Wrap all cli specs in `aggregate_failures` so that the expected and
@@ -28,6 +28,6 @@ RSpec.shared_context 'cli spec behavior' do
   end
 
   after do
-    RuboCop::ResultCache.inhibit_cleanup = false
+    RubyLint::ResultCache.inhibit_cleanup = false
   end
 end

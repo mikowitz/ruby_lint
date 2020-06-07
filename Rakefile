@@ -40,7 +40,7 @@ task :bench_cop, %i[cop srcpath times] do |_task, args|
   require 'benchmark'
   require 'rubocop'
   include RuboCop
-  include RuboCop::Formatter::TextUtil
+  include RubyLint::Formatter::TextUtil
 
   cop_name = args[:cop]
   src_path = args[:srcpath]
@@ -89,12 +89,12 @@ task documentation_syntax_check: :yard_for_generate_documentation do
 
   ok = true
   YARD::Registry.load!
-  cops = RuboCop::Cop::Cop.registry
+  cops = RubyLint::Cop::Cop.registry
   cops.each do |cop|
     next if %i[RSpec Capybara FactoryBot].include?(cop.department)
 
     examples = YARD::Registry.all(:class).find do |code_object|
-      next unless RuboCop::Cop::Badge.for(code_object.to_s) == cop.badge
+      next unless RubyLint::Cop::Badge.for(code_object.to_s) == cop.badge
 
       break code_object.tags('example')
     end
@@ -106,11 +106,11 @@ task documentation_syntax_check: :yard_for_generate_documentation do
 
         # Ruby 2.6 or higher does not support a syntax used in
         # `Lint/UselessElseWithoutRescue` cop's example.
-        parser = if cop == RuboCop::Cop::Lint::UselessElseWithoutRescue
+        parser = if cop == RubyLint::Cop::Lint::UselessElseWithoutRescue
                    Parser::Ruby25.new(RuboCop::AST::Builder.new)
                  # Ruby 2.7 raises an syntax error in
                  # `Lint/CircularArgumentReference` cop's example.
-                 elsif cop == RuboCop::Cop::Lint::CircularArgumentReference
+                 elsif cop == RubyLint::Cop::Lint::CircularArgumentReference
                    Parser::Ruby26.new(RuboCop::AST::Builder.new)
                  else
                    Parser::Ruby27.new(RuboCop::AST::Builder.new)

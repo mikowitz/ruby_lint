@@ -1,0 +1,98 @@
+# frozen_string_literal: true
+
+RSpec.describe RubyLint::Formatter::OffenseCountFormatter do
+  subject(:formatter) { described_class.new(output) }
+
+  let(:output) { StringIO.new }
+
+  let(:files) do
+    %w[lib/rubocop.rb spec/spec_helper.rb exe/ruby_lint].map do |path|
+      File.expand_path(path)
+    end
+  end
+
+  let(:finish) { formatter.file_finished(files.first, offenses) }
+
+  describe '#file_finished' do
+    before { formatter.started(files) }
+
+    context 'when no offenses are detected' do
+      let(:offenses) { [] }
+
+      it 'does not add to offense_counts' do
+        expect { finish }.not_to change(formatter, :offense_counts)
+      end
+    end
+
+    context 'when any offenses are detected' do
+      let(:offenses) do
+        [instance_double(RubyLint::Cop::Offense, cop_name: 'OffendedCop')]
+      end
+
+      it 'increments the count for the cop in offense_counts' do
+        expect { finish }.to change(formatter, :offense_counts)
+      end
+    end
+  end
+
+  describe '#report_summary' do
+    context 'when an offense is detected' do
+      let(:cop_counts) { { 'OffendedCop' => 1 } }
+
+      it 'shows the cop and the offense count' do
+        formatter.report_summary(cop_counts)
+        expect(output.string).to include(
+          "\n1  OffendedCop\n--\n1  Total"
+        )
+      end
+    end
+  end
+
+  describe '#finished' do
+    context 'when there are many offenses' do
+      let(:offenses) do
+        %w[CopB CopA CopC CopC].map do |cop|
+          instance_double(RubyLint::Cop::Offense, cop_name: cop)
+        end
+      end
+
+      before do
+        allow(output).to receive(:tty?).and_return(false)
+        formatter.started(files)
+        finish
+      end
+
+      it 'sorts by offense count first and then by cop name' do
+        formatter.finished(files)
+        expect(output.string).to eq(<<~OUTPUT)
+
+          2  CopC
+          1  CopA
+          1  CopB
+          --
+          4  Total
+
+        OUTPUT
+      end
+    end
+
+    context 'when output tty is true' do
+      let(:offenses) do
+        %w[CopB CopA CopC CopC].map do |cop|
+          instance_double(RubyLint::Cop::Offense, cop_name: cop)
+        end
+      end
+
+      before do
+        allow(output).to receive(:tty?).and_return(true)
+        formatter.started(files)
+        finish
+      end
+
+      it 'has a progresbar' do
+        formatter.finished(files)
+        expect(formatter.instance_variable_get(:@progressbar).progress).to eq 1
+      end
+    end
+  end
+end

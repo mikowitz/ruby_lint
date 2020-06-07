@@ -28,10 +28,10 @@ Metrics/ModuleLength:
 # Offense count: 10
 RSpec/AnyInstance:
   Exclude:
-    - 'spec/rubocop/cli_spec.rb'
-    - 'spec/rubocop/cop/lint/duplicate_methods_spec.rb'
-    - 'spec/rubocop/cop/team_spec.rb'
-    - 'spec/rubocop/target_finder_spec.rb'
+    - 'spec/ruby_lint/cli_spec.rb'
+    - 'spec/ruby_lint/cop/lint/duplicate_methods_spec.rb'
+    - 'spec/ruby_lint/cop/team_spec.rb'
+    - 'spec/ruby_lint/target_finder_spec.rb'
 
 # Offense count: 972
 # Configuration parameters: Prefixes.
@@ -47,16 +47,16 @@ RSpec/ExampleLength:
 # Offense count: 38
 RSpec/ExpectOutput:
   Exclude:
-    - 'spec/rubocop/cli/cli_auto_gen_config_spec.rb'
-    - 'spec/rubocop/cli/cli_options_spec.rb'
-    - 'spec/rubocop/config_spec.rb'
-    - 'spec/rubocop/cop/cop_spec.rb'
-    - 'spec/rubocop/formatter/disabled_config_formatter_spec.rb'
-    - 'spec/rubocop/formatter/formatter_set_spec.rb'
-    - 'spec/rubocop/options_spec.rb'
-    - 'spec/rubocop/rake_task_spec.rb'
-    - 'spec/rubocop/result_cache_spec.rb'
-    - 'spec/rubocop/target_finder_spec.rb'
+    - 'spec/ruby_lint/cli/cli_auto_gen_config_spec.rb'
+    - 'spec/ruby_lint/cli/cli_options_spec.rb'
+    - 'spec/ruby_lint/config_spec.rb'
+    - 'spec/ruby_lint/cop/cop_spec.rb'
+    - 'spec/ruby_lint/formatter/disabled_config_formatter_spec.rb'
+    - 'spec/ruby_lint/formatter/formatter_set_spec.rb'
+    - 'spec/ruby_lint/options_spec.rb'
+    - 'spec/ruby_lint/rake_task_spec.rb'
+    - 'spec/ruby_lint/result_cache_spec.rb'
+    - 'spec/ruby_lint/target_finder_spec.rb'
 
 # Offense count: 430
 RSpec/MultipleExpectations:
@@ -65,6 +65,6 @@ RSpec/MultipleExpectations:
 # Offense count: 5
 RSpec/SubjectStub:
   Exclude:
-    - 'spec/rubocop/config_spec.rb'
-    - 'spec/rubocop/formatter/json_formatter_spec.rb'
-    - 'spec/rubocop/formatter/progress_formatter_spec.rb'
+    - 'spec/ruby_lint/config_spec.rb'
+    - 'spec/ruby_lint/formatter/json_formatter_spec.rb'
+    - 'spec/ruby_lint/formatter/progress_formatter_spec.rb'

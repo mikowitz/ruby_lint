@@ -3,7 +3,7 @@
 RSpec.describe 'isolated environment', :isolated_environment, type: :feature do
   include_context 'cli spec behavior'
 
-  let(:cli) { RuboCop::CLI.new }
+  let(:cli) { RubyLint::CLI.new }
 
   # Configuration files above the work directory shall not disturb the
   # tests. This is especially important on Windows where the temporary

@@ -4,8 +4,8 @@
 require 'rainbow'
 Rainbow.enabled = false
 
-require 'rubocop'
-require 'rubocop/cop/internal_affairs'
+require 'ruby_lint'
+require 'ruby_lint/cop/internal_affairs'
 
 require 'webmock/rspec'
 
@@ -13,7 +13,7 @@ require_relative 'core_ext/string'
 require 'pry'
 
 # Require supporting files exposed for testing.
-require 'rubocop/rspec/support'
+require 'ruby_lint/rspec/support'
 
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
@@ -33,7 +33,7 @@ RSpec.configure do |config|
   config.example_status_persistence_file_path = 'spec/examples.txt'
   config.disable_monkey_patching!
 
-  config.include RuboCop::RSpec::ExpectOffense
+  config.include RubyLint::RSpec::ExpectOffense
 
   config.order = :random
   Kernel.srand config.seed
@@ -49,6 +49,6 @@ RSpec.configure do |config|
   end
 
   config.after do
-    RuboCop::PathUtil.reset_pwd
+    RubyLint::PathUtil.reset_pwd
   end
 end

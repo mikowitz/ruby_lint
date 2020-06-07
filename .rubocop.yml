@@ -2,7 +2,7 @@
 
 inherit_from: .rubocop_todo.yml
 require:
-  - rubocop/cop/internal_affairs
+  - ruby_lint/cop/internal_affairs
   - rubocop-performance
   - rubocop-rspec
 
@@ -32,7 +32,7 @@ Style/FormatStringToken:
 Style/IpAddresses:
   # The test for this cop includes strings that would cause offenses
   Exclude:
-  - spec/rubocop/cop/style/ip_addresses_spec.rb
+  - spec/ruby_lint/cop/style/ip_addresses_spec.rb
 
 Layout/EndOfLine:
   EnforcedStyle: lf
@@ -95,7 +95,7 @@ Metrics/BlockLength:
 
 Metrics/ClassLength:
   Exclude:
-    - lib/rubocop/config_obsoletion.rb
+    - lib/ruby_lint/config_obsoletion.rb
 
 Metrics/ModuleLength:
   Exclude:
@@ -103,7 +103,7 @@ Metrics/ModuleLength:
 
 RSpec/FilePath:
   Exclude:
-    - spec/rubocop/formatter/junit_formatter_spec.rb
+    - spec/ruby_lint/formatter/junit_formatter_spec.rb
 
 RSpec/PredicateMatcher:
   EnforcedStyle: explicit
